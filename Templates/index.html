@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CropGuard</title>
+    <link rel="stylesheet" href="/Static/index.css">
+    <link rel="icon" href="/Static/favicon.ico">
+ <style>
+  *{
+    overflow: hidden;
+  }
+ </style>
+</head>
+<body>
+
+    <section id="Home">
+
+    <!--Header Section-->
+
+    <header class="header">
+
+        <div class="logo-container">
+            <img class="logo" src="/images/Green_Plant_and_Agriculture_Logo-removebg-preview (1).png">
+        </div>
+
+        <div class="hamburger-menu" id="ResMenuBtn">
+          <div class="bar" id="ResMenuBtn"></div>
+          <div class="bar" id="ResMenuBtn"></div>
+          <div class="bar" id="ResMenuBtn"></div>
+      </div>
+
+        <div class="nav" >
+            <ul id="ResMenu">
+                <a href="#home"><li>Home</li></a>  
+                <a href="/Templates/about-us.html" ><li>About Us</li></a> 
+                <a href="/Templates/diagnose.html"><li>Diagnose</li></a> 
+            </ul>
+        </div>
+
+    </header>
+    <!--Home Section-->
+    
+      <h4 class="home-text">
+        Crop Disease Diagnosis
+      </h4>
+
+      <a href="/Templates/diagnose.html"><button class="Diagnose-btn">Diagnose</button></a>
+      <img class="home-image" src="/images/home-image.png">
+      <div class="side-image-container">
+        <img class="side-image" src="/images/side-plant.png">
+      </div>
+
+    </section>
+ <script>
+const ResBtn = document.getElementById('ResMenuBtn')
+const Menu = document.getElementById('ResMenu')
+
+ResBtn.addEventListener('click', async() =>{
+ showNavMenu();
+ 
+}
+ 
+)
+
+
+
+function showNavMenu() {
+  Menu.style.display = 'block';
+}
+function hideNavMenu() {
+  Menu.style.display = 'none';
+}
+
+ </script>
+
+</body>
+</html>

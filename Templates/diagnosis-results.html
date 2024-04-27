@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnosis Results</title>
+    <link rel="stylesheet" href="/Static/index.css">
+    <link rel="icon" href="/Static/favicon.ico">
+    <style>
+       
+
+        #loading-overlay1 {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 75%;
+            top: 10%;
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+           
+        }
+
+        .loading-spinner1 {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 2s linear infinite;
+            position: absolute;
+            top: 2%;
+            left: 27%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!--Header Section-->
+    <header class="header">
+        <div class="logo-container">
+            <img class="logo" src="/images/Green_Plant_and_Agriculture_Logo-removebg-preview (1).png">
+        </div>
+
+        <div class="hamburger-menu" id="ResMenuBtn">
+            <div class="bar" id="ResMenuBtn"></div>
+            <div class="bar" id="ResMenuBtn"></div>
+            <div class="bar" id="ResMenuBtn"></div>
+        </div>
+
+        <div class="nav">
+            <ul id="ResMenu">
+                <a href="/Templates/index.html"><li>Home</li></a>  
+                <a href="/Templates/about-us.html"><li>About Us</li></a> 
+                <a href="/Templates/diagnose.html"><li>Diagnose</li></a> 
+                <button id="language-btn">Kiswahili</button>
+            </ul>
+             <!-- Loading Overlay -->
+    <div id="loading-overlay1">
+        <div class="loading-spinner1"></div>
+    </div>
+        </div>
+    </header>
+
+    <!--    diagnosis results-->
+    <section id="results">
+        <h3 class="disease-name" id="disease-name-display"></h3>
+        <img class="disease-image" id="disease-image-display" src="" alt="Disease Image">
+        <p class="diagnosis-info" id="treatment-info-display">
+        </p>
+    </section>
+
+    <script>
+          const languageBtn = document.getElementById('language-btn');
+
+          const ResBtn = document.getElementById('ResMenuBtn')
+        const Menu = document.getElementById('ResMenu')
+
+       ResBtn.addEventListener('click',async() => {
+        showNavMenu();
+       })
+
+       function showNavMenu(){
+        Menu.style.display = 'block'
+       }
+       function hideNavMenu(){
+       Menu.style.display = 'hide'
+       }
+
+    languageBtn.addEventListener('click', () => {
+    showLoadingOverlay1();
+    const isSwahili = languageBtn.textContent.toLowerCase() === 'kiswahili';
+    if (isSwahili) {
+        
+        
+        // Send the Kiswahili prompt and reopen the page
+        sendKiswahiliPrompt();
+    }
+    
+});
+
+function sendKiswahiliPrompt() {
+
+    showLoadingOverlay1();
+    const diseaseImageElement = document.getElementById('disease-image-display');
+    const imageBase64 = diseaseImageElement.src.split(',')[1];
+
+    const formData = new FormData();
+    formData.append('image', imageBase64);
+    formData.append('language', 'kiswahili');
+
+    fetch('http://localhost:5000/analyze_image', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        const newWindow = window.open('diagnosis-results.html');
+        newWindow.addEventListener('load', () => {
+            newWindow.postMessage({
+                disease_name: data.disease_name,
+                treatment_info: data.treatment_info,
+                image_base64: data.image
+            }, '*');
+        }, false);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while processing the Kiswahili request');
+    })
+
+    .finally(() => {
+        hideLoadingOverlay1(); // Call the function to hide the loading overlay
+    });
+
+}
+
+        window.onload = function() {
+            window.addEventListener('message', (event) => {
+    const { disease_name, treatment_info, image_base64 } = event.data;
+
+    const diseaseNameElement = document.getElementById('disease-name-display');
+    const diseaseImageElement = document.getElementById('disease-image-display');
+    const treatmentInfoElement = document.getElementById('treatment-info-display');
+
+    if (disease_name) {
+        diseaseNameElement.textContent = disease_name;
+    } else {
+        diseaseNameElement.style.display = 'none';
+    }
+
+    if (image_base64) {
+        diseaseImageElement.src = `data:image/jpeg;base64,${image_base64}`;
+    } else {
+        diseaseImageElement.style.display = 'none';
+    }
+
+    if (treatment_info) {
+        let modifiedTreatmentInfo = treatment_info;
+        modifiedTreatmentInfo = modifiedTreatmentInfo.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+        .replace(/\*(.+?)\*/g, '<b>$1</b>')
+        .replace(/#{3,}/g, '<br>')
+        .replace(/#{2,}/g, '<br>')
+                                                     .replace(/(\d+)/g, '<br>$1');
+        treatmentInfoElement.innerHTML = modifiedTreatmentInfo;
+    } else {
+        treatmentInfoElement.style.display = 'none';
+    }
+});}
+function showLoadingOverlay1() {
+    const loadingOverlay1 = document.getElementById('loading-overlay1');
+    loadingOverlay1.style.display = 'block';
+}
+
+function hideLoadingOverlay1() {
+    const loadingOverlay1 = document.getElementById('loading-overlay1');
+    loadingOverlay1.style.display = 'none';
+}
+    </script>
+</body>
+</html>

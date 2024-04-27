@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnose</title>
+    <link rel="stylesheet" href="/Static/index.css">
+    <link rel="icon" href="/Static/favicon.ico">
+    <style>
+
+        * {
+            overflow: hidden;
+        }
+
+        #loading-overlay {
+           display:none;
+            position: fixed;
+            z-index: 999;
+            left: 47%;
+            top: 55%;
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+           
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+            top: 46%;
+            left: 44.5%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="Diagnose-page">
+    <!--Header Section-->
+    <header class="header">
+        <div class="logo-container">
+            <img class="logo" src="/images/Green_Plant_and_Agriculture_Logo-removebg-preview (1).png">
+        </div>
+
+        <div class="hamburger-menu" id="ResMenuBtn">
+            <div class="bar" id="ResMenuBtn"></div>
+            <div class="bar" id="ResMenuBtn"></div>
+            <div class="bar" id="ResMenuBtn"></div>
+        </div>
+
+        <div class="nav">
+            <ul id="ResMenu">
+                <a href="/Templates/index.html"><li>Home</li></a>  
+                <a href="/Templates/about-us.html"><li>About Us</li></a> 
+                <a href="#diagnose"><li>Diagnose</li></a> 
+            </ul>
+        </div>
+    </header>
+
+    <!-- Upload Section -->
+    <h3 class="upload-text">Upload your affected crop image for Diagnosis</h3>
+
+    <div id="upload-container">
+        <input type="file" id="image-upload" accept="image/*">
+
+        <!-- Loading Overlay -->
+    <div id="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+        <button id="diagnose-btn">Diagnose</button>
+
+    </div>
+
+    
+   <img class="d-side-image" src="/images/side-plant.png">
+
+    
+
+    <script>
+        const diagnoseBtn = document.getElementById('diagnose-btn');
+        const imageUpload = document.getElementById('image-upload');
+        const loadingOverlay = document.getElementById('loading-overlay');
+
+        const ResBtn = document.getElementById('ResMenuBtn')
+        const Menu = document.getElementById('ResMenu')
+
+       ResBtn.addEventListener('click',async() => {
+        showNavMenu();
+       })
+
+       function showNavMenu(){
+        Menu.style.display = 'block'
+       }
+       function hideNavMenu(){
+       Menu.style.display = 'hide'
+       }
+
+        diagnoseBtn.addEventListener('click', async () => {
+            const file = imageUpload.files[0];
+            if (!file) {
+                alert('Please select an image file');
+                return;
+            }
+
+            showLoadingOverlay();
+
+            const formData = new FormData();
+            formData.append('image', file);
+
+            try {
+                const response = await fetch('http://localhost:5000/analyze_image', {
+                 method: 'POST',
+                 body: formData
+                });
+
+                const data = await response.json();
+
+                // Redirect to the diagnosis-results.html page with the data as URL parameters
+                const diseaseNameEncoded = encodeURIComponent(data.disease_name);
+                const treatmentInfoEncoded = encodeURIComponent(data.treatment_info);
+                const imageBase64 = data.image;
+                const newWindow = window.open('diagnosis-results.html');
+                newWindow.addEventListener('load', () => {
+                newWindow.postMessage({
+                disease_name: data.disease_name,
+                treatment_info: data.treatment_info,
+               image_base64: data.image
+    }, '*');
+}, false);
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while processing the image');
+                hideLoadingOverlay();
+            }
+        });
+
+        function showLoadingOverlay() {
+            loadingOverlay.style.display = 'block';
+        }
+
+        function hideLoadingOverlay() {
+            loadingOverlay.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

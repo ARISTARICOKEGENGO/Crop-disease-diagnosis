@@ -1,0 +1,71 @@
+    
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>About Us</title>
+        <link rel="stylesheet" href="/Static/index.css">
+        <link rel="icon" href="/Static/favicon.ico">
+
+        <style>
+            *{
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+    <!--Header Section-->
+    <header class="header">
+        <div class="logo-container">
+            <img class="logo" src="/images/Green_Plant_and_Agriculture_Logo-removebg-preview (1).png">
+        </div>
+
+        <div class="hamburger-menu" id="ResMenuBtn">
+            <div class="bar" id="ResMenuBtn"></div>
+            <div class="bar" id="ResMenuBtn"></div>
+            <div class="bar" id="ResMenuBtn"></div>
+        </div>
+
+
+        <div class="nav">
+            <ul id="ResMenu">
+                <a href="/Templates/index.html"><li>Home</li></a>  
+                <a href="#about-us"><li>About Us</li></a> 
+                <a href="/Templates/diagnose.html"> <li>Diagnose</li></a> 
+            </ul>
+        </div>
+    </header>
+
+    <!--About Us-->
+    <section id="About-Us">
+     
+
+        <h3 class="about-title">About Us</h3>
+        <img class="about-image" src="/images/Green_Plant_and_Agriculture_Logo-removebg-preview (1).png">
+        <p class="about-text">CropGuard pioneers agricultural technology to empower farmers worldwide.our Mobile crop Disease Diagnosis App employs cutting-edge machine learning to swiftly identify crop disease and pests,ensuring optimal yields and sustainable farming practices.With us, farmers gain instant access to expert support,fostering resilient and prosperous harvests.CropGuard:protecting crops, Empowering Farmers.</p> 
+      
+        <div class="side-image-container">
+            <img class="about-side-image" src="/images/side-plant.png">
+          </div>
+          
+      </section>
+
+      <script>
+        const ResBtn = document.getElementById('ResMenuBtn')
+        const Menu = document.getElementById('ResMenu')
+
+       ResBtn.addEventListener('click',async() => {
+        showNavMenu();
+       })
+
+       function showNavMenu(){
+        Menu.style.display = 'block'
+       }
+       function hideNavMenu(){
+       Menu.style.display = 'hide'
+       }
+      </script>
+    </body>
+    </html>
+    
