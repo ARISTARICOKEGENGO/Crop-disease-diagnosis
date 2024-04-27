@@ -1,1 +1,361 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+  list-style: none;
+  box-sizing: border-box;
+  margin: 0;
+  text-decoration: none;
+  scroll-behavior: smooth;
+  
+}
+.hamburger-menu{
+    display: none;
+}
+/*Header Section*/
+
+.header{
+    align-items: center;
+    display: flex;
+    top: 0;
+    
+}
+
+.logo{
+    width: 150px;
+}
+
+.nav{
+    width: 600px;
+    margin-left: 22%;
+    
+}
+
+ul li{
+    display: inline;
+    padding: 40px;
+    color: green;
+    font-size: 18px;
+ 
+}
+
+ul li:hover{
+    color: black;
+}
+
+/*Home Section*/
+
+.home-text{
+    font-size: 100px;
+    width: 700px;
+    margin-top:40px;
+    margin-left:5%;
+    
+   
+}
+.home-image{
+    width: 550px;
+    position: absolute;
+    margin-left:50%;
+    margin-top: -15%;
+ 
+}
+.Diagnose-btn{
+    margin-left: 20%;
+    margin-top: 2%;
+    width: 220px;
+    height:44px;
+    background-color: green;
+    border-radius: 12px;
+    border: none;
+    color: white;
+    font-style: bold;
+    font-size: 17px;
+    position: absolute;
+    z-index: 2;
+
+}
+
+
+.Diagnose-btn:hover{
+    
+    background-color: transparent;
+    border: 2px green solid;
+    color: black;
+}
+
+.side-image{
+    width: 500px;
+    margin-left:0.3%;
+    margin-top: -12%;
+  z-index: 1;
+}
+
+
+/*About Us section*/
+
+.about-image{
+    width: 500px;
+    position:absolute ;
+    margin-top: -7%;
+  
+}
+
+
+.about-title{
+    margin-left: 65%;
+    margin-top: 1%;
+    font-size: 23px;
+    color: green;
+}
+
+.about-text{
+    width: 700px;
+    margin-left: 40%;
+    margin-top: 5%;
+    font-size: 20px;
+}
+
+.about-side-image{
+    position: absolute;
+    margin-top: -18%;
+    width: 600px;
+    margin-left:79%;
+    
+}
+
+/*Diagnose section*/
+
+.upload-text{
+    margin-left: 34%;
+    margin-top: 4%;
+    
+}
+#upload-container input[type="file"] {
+  width: 500px;
+  height: 100px;
+  margin-left: 43%;
+  margin-top: 7%;
+
+}
+
+#diagnose-btn{
+    background-color: transparent;
+    border: 2px green solid;
+    color: black; 
+    width: 220px;
+    height:44px;
+    border-radius: 12px;
+    font-style: bold;
+    font-size: 17px;
+    position: absolute;
+    margin-top: 16%;
+    margin-left: -36%;
+  
+}
+
+#diagnose-btn:hover{
+    background-color: green;
+    color: white;
+    border: none;
+}
+
+#loading-overlay {
+    display:none;
+     position: fixed;
+     z-index: 999;
+     left: 30%;
+     top: 55%;
+     width: 100px;
+     height: 100px;
+     overflow: hidden;
+    
+ }
+.d-side-image{
+    position: absolute;
+    width: 600px;
+    margin-top: -20%;
+}
+
+/*Diagnosis results*/
+
+.disease-name{
+    margin-left: 37%;
+    font-size: 16px;
+    color: green;
+    height: 10%;
+    padding-bottom:2%;
+    
+    
+}
+
+#language-btn{
+    
+    margin-left: 120%;
+    width: 150px;
+    height: 40px;
+    background: none;
+    border-radius: 15px;
+    font-size: 16px;
+}
+
+#language-btn:hover{
+    background-color: green;
+    color: white;
+    border: none;
+}
+.disease-image{
+   
+    width: 400px;
+    margin-left: 3%;
+    position: absolute;
+}
+
+.diagnosis-info{
+    width:800px;
+    margin-left: 37%;
+    font-size: 16px;
+    height: auto;
+   
+   
+}
+.diagnose-side-image{
+    margin-left: 80%;
+    margin-top: -14%;
+}
+
+/*Responsive section*/
+
+@media  (max-width: 768px) {
+   
+    /*Home section*/
+
+    
+    .hamburger-menu{
+        display: block;
+        position: absolute;
+        margin-left: 84%; 
+    }
+    .bar{
+       
+        border: 2px solid black;
+        width: 30px;
+       margin: 6px;
+    }
+
+    .nav{
+      
+        width: 220px; 
+        
+    }
+
+    ul{
+        padding-top: 10px;
+        margin-top: 1%;
+        position: absolute;
+        display: none;
+        z-index: 2;
+    }
+
+    ul li{
+        display: block;
+        font-size: 16px;
+        color: black;
+       padding: 20px;
+       
+       
+    }
+    .home-text{
+        font-size: 69px;
+        width: 350px;
+        margin-top: 18%;
+        
+    }
+
+    .Diagnose-btn{
+        margin-top: 5%;
+        
+    }
+
+    .home-image{
+        display: none;
+    }
+    .side-image{
+        margin-top: -30%;
+        margin-left: 8;
+        width: 600px;
+    }
+
+    /*Diagnose section*/
+
+    .Diagnose-page{
+        overflow: hidden;
+    }
+    .upload-text{
+        width: 620px;
+        font-size: 18px;
+        margin-left: 1%;
+        margin-top: 30%;
+        
+    }
+
+    #upload-container{
+       justify-content: center;
+       align-items: center;
+       display: flex;
+        width: 400px;
+        height: 300px;
+        margin-left: 5%;
+
+        
+    }
+
+    #upload-container input[type="file"]{
+        margin-left: 14%;
+        font-size: 18px;
+        z-index: 2;
+    }
+
+    #diagnose-btn{
+        margin-top: 50%;
+        margin-left: -6%;
+        z-index: 2;
+    }
+
+    .diagnose-side-image{
+        margin-left: 77%;
+        margin-top: -60%;
+        width: 600px;
+        z-index: 1;
+    }
+
+    /*About us section*/
+
+    .about-title{
+        margin-top: 50%;
+        margin-left: 10%;
+    }
+
+    .about-image{
+        width: 300px;
+        margin-top: -67%;
+        margin-left: 8%;
+        z-index: 1;
+    }
+    .about-text{
+        margin-left:10% ;
+        width: 350px;
+        font-size: 16px;
+    }
+
+    .about-side-image{
+        margin-top: -58%;
+        margin-left:80%;
+        width: 600px;
+    }
+}
+
+
+
+
 
