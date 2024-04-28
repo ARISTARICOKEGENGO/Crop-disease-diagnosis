@@ -12,6 +12,9 @@
 .hamburger-menu{
     display: none;
 }
+.hamburger-menu1{
+   display: none;
+}
 /*Header Section*/
 
 .header{
@@ -233,6 +236,11 @@ ul li:hover{
     
     .hamburger-menu{
         display: block;
+        position: absolute;
+        margin-left: 84%; 
+    }
+    .hamburger-menu{
+        display: hide;
         position: absolute;
         margin-left: 84%; 
     }
