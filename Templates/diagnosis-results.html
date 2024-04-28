@@ -81,21 +81,28 @@
     </section>
 
     <script>
-          const languageBtn = document.getElementById('language-btn');
-
           const ResBtn = document.getElementById('ResMenuBtn')
-        const Menu = document.getElementById('ResMenu')
+const ResBtn1 = document.getElementById('ResMenuBtn1')
+const Menu = document.getElementById('ResMenu')
 
-       ResBtn.addEventListener('click',async() => {
-        showNavMenu();
-       })
+ResBtn.addEventListener('click', async() =>{
+ showNavMenu();
+ResBtn1.style.display = 'block';
+}
+ 
+)
+ResBtn1.addEventListener('click', async() => {
+    hideNavMenu();
+    })
 
-       function showNavMenu(){
-        Menu.style.display = 'block'
-       }
-       function hideNavMenu(){
-       Menu.style.display = 'hide'
-       }
+
+
+function showNavMenu() {
+  Menu.style.display = 'block';
+}
+function hideNavMenu() {
+  Menu.style.display = 'none';
+}
 
     languageBtn.addEventListener('click', () => {
     showLoadingOverlay1();
