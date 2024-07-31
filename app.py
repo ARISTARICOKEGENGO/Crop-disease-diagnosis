@@ -8,7 +8,7 @@ import requests
 app = Flask(__name__)
 cors = CORS(app, origins=["http://127.0.0.1:5500", "http://127.0.0.1:5000"])
 # Set up OpenAI API key
-api_key = "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"
+api_key = ""
 
 
 @app.route('/analyze_image', methods=['POST'])
